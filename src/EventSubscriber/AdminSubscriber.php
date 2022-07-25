@@ -2,20 +2,41 @@
 
 namespace App\EventSubscriber;
 
+use App\Model\TimestampedInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AdminSubscriber implements EventSubscriberInterface
 {
-        public static function getSubscribedEvents()
-        {
-            return[
-                BeforeEntityPersistedEvent::class => ['']
-            ];
-        }
-        
-    public function setEntityCreatAt(BeforeEntityPersistedEvent $event)
+    public static function getSubscribedEvents():array
     {
-        $event->getEntityInstance();
-}
+        return [
+            BeforeEntityPersistedEvent::class => ['setEntityCreatAt'],
+            BeforeEntityUpdatedEvent::class => ['setEntityUpdatedAt']
+        ];
+    }
 
+    public function setEntityCreatAt(BeforeEntityPersistedEvent $event): void
+    {
+        $entity =  $event->getEntityInstance();
+
+        if (!$entity instanceof TimestampedInterface){
+            return;
+        }
+
+        $entity->setCreatedAt(new \DateTime());
+    }
+
+
+    public function setEntityUpdatedAt(BeforeEntityPersistedEvent $event): void
+{
+    $entity =  $event->getEntityInstance();
+
+    if (!$entity instanceof TimestampedInterface){
+        return;
+    }
+
+    $entity->setUpdatedAt(new \DateTime());
+}
+}
