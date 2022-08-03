@@ -26,7 +26,7 @@ class CommentType extends AbstractType {
             ->add('article', HiddenType::class)
 
             ->add('send', SubmitType::class, [
-                'label' => 'envoyer'
+                'label' => 'Envoyer'
             ]);
 
 

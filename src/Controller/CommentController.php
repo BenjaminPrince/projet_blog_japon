@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
 use App\Entity\Comment;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,12 +42,12 @@ class CommentController extends AbstractController
         $em->persist($comment);
         $em->flush();
 
-        $html = $this->renderview('comment/index.html.twig', [
+        $html = $this->renderView('comment/index.html.twig', [
             'comment' => $comment
         ]);
 
         return $this->json([
-            'code' => 'COMMENT_ADDED_SUCCESFULLY' ,
+            'code' => 'COMMENT_ADDED_SUCCESSFULLY' ,
             'message' => $html,
             'numberOfComments' => $commentRepo->count(['article'=>'$article'])
         ]);
