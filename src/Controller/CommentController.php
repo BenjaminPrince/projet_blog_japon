@@ -18,20 +18,18 @@ class CommentController extends AbstractController
     public function add(Request $request, ArticleRepository $articleRepo, UserRepository $userRepo, EntityManagerInterface $em, CommentRepository $commentRepo): Response
     {
         $commentData = $request->request->all('comment');
-
-        if (!$this->isCsrfTokenValid('comment-add', $commentData['_token'])){
-            return $this->json([
-                'code' => 'INVALID_CSRF_TOKEN'
-            ], Response::HTTP_BAD_REQUEST);
-        }
+        
+        // if (!$this->isCsrfTokenValid('comment__token', $commentData['_token'])){
+        //     return $this->json([
+        //         'code' => 'INVALID_CSRF_TOKEN'
+        //     ], Response::HTTP_BAD_REQUEST);
+        // }
 
         $article = $articleRepo->findOneBy(['id' => $commentData['article']]);
-
         if (!$article) {
             return $this->json([
                  'code' => 'ARTICLE_NOT_FOUND' ,
             ], Response::HTTP_BAD_REQUEST);
-           
         }
 
         $comment = new Comment($article);
