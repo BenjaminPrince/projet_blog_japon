@@ -9,34 +9,33 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AdminSubscriber implements EventSubscriberInterface
 {
-    public static function getSubscribedEvents():array
+    public static function getSubscribedEvents(): array
     {
         return [
-            BeforeEntityPersistedEvent::class => ['setEntityCreatAt'],
-            BeforeEntityUpdatedEvent::class => ['setEntityUpdatedAt']
+            BeforeEntityPersistedEvent::class => ['setEntityCreatedAt'],
+            BeforeEntityUpdatedEvent::class => ['setEntityUpdatedAt'],
         ];
     }
 
-    public function setEntityCreatAt(BeforeEntityPersistedEvent $event): void
+    public function setEntityCreatedAt(BeforeEntityPersistedEvent $event)
     {
-        $entity =  $event->getEntityInstance();
+       $entity = $event->getEntityInstance();
 
-        if (!$entity instanceof TimestampedInterface){
+       if (!$entity instanceof TimestampedInterface) {
+           return;
+       }
+
+       $entity->setCreatedAt(new \DateTime());
+    }
+
+    public function setEntityUpdatedAt(BeforeEntityUpdatedEvent $event)
+    {
+        $entity = $event->getEntityInstance();
+
+        if (!$entity instanceof TimestampedInterface) {
             return;
         }
 
-        $entity->setCreatedAt(new \DateTime());
+        $entity->setUpdatedAt(new \DateTime());
     }
-
-
-    public function setEntityUpdatedAt(BeforeEntityPersistedEvent $event): void
-{
-    $entity =  $event->getEntityInstance();
-
-    if (!$entity instanceof TimestampedInterface){
-        return;
-    }
-
-    $entity->setUpdatedAt(new \DateTime());
-}
 }
