@@ -35,6 +35,7 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('ea_admin_url', [$this, 'getAdminUrl']),
+            new TwigFunction('ea_index', [$this, 'getAdminUrl']),
             new TwigFunction('ea_edit', [$this, 'getAdminEditUrl']),
             new TwigFunction('entity_label', [$this, 'getEditCurrentEntityLabel']),
         ];
