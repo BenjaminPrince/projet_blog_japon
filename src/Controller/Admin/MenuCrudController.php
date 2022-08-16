@@ -27,8 +27,7 @@ class MenuCrudController extends AbstractCrudController
     public function __construct(
         private MenuRepository $menuRepo,
         private RequestStack   $requestStack
-    )
-    {
+    ) {
     }
 
     public static function getEntityFqcn(): string
@@ -85,6 +84,7 @@ class MenuCrudController extends AbstractCrudController
             self::MENU_LINKS => 'link',
             default => 'page'
         };
+       
     }
 
     private function getFieldFromSubMenuIndex(int $subMenuIndex): AssociationField|TextField
