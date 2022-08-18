@@ -11,7 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\User;
 
+
+/** @method User getUser() */
 class CommentController extends AbstractController
 {
     #[Route('/ajax/comments', name: 'comment_add')]
@@ -32,9 +35,17 @@ class CommentController extends AbstractController
             ], Response::HTTP_BAD_REQUEST);
         }
 
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this-> json([
+                'code' => 'USER_NOT_AUTHENTICATED_FULLY'
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         $comment = new Comment($article);
         $comment -> setContent($commentData['content']);
-        $comment -> setUser($userRepo->findOneBy(['id'=> 1]));
+        $comment -> setUser($user);
         $comment -> setCreatedAt(new \DateTime());
 
         $em->persist($comment);
