@@ -6,34 +6,48 @@
     <head>
         <meta charset="UTF-8">
         <title>Blog - {% block title %}{% endblock %}</title>
+        
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
+        {# <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> #}
+        <link href={{asset('build/style.css')}} rel="stylesheet">
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
+        {# <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> #}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
 
-    {% if is_granted('ROLE_AUTHOR') %}
+    {# {% if is_granted('ROLE_AUTHOR') %} #}
      <nav class="py-2 bg-dark border-bottom">
             <div class="container d-flex flex-wrap">
-
-                <div class="dropdown">
-                 <a class="nav nav-link dropdown-toggle text-white" role="button" id="dropdownAdminLink" data-bs-toggle="dropdown" aria-expanded="false">
-                     Blog Japon
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminDashboard">
-                    <li><a class="dropdown-item" href="{{path('admin')}}">Tableau de bord</a></li>
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li>
-                    {% endif %}
-
-                </ul>
+                <div class="dropdown d-flex">
+                    <a class="nav nav-link dropdown-toggle text-white" role="button" id="dropdownAdminLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Blog Japon
+                    </a> 
+                    {% if is_granted('ROLE_ADMIN', 'ROLE_AUTHOR') %}
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminDashboard">
+                        <li><a class="dropdown-item" href="{{path('admin')}}">Tableau de bord</a></li>
+                       
+                        {# <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li> #}
+                        {% endif %}
+                    </ul>
+                        <a class="link-nav-header text-white p-8" href="{{path('app_home')}}">Page d'article </a>
+                        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a class="link-nav-header text-white" href="{{ path('app_register') }}">S'inscrire</a>
+                            <a class="link-nav-header text-white" href="{{ path('app_login') }}">Se connecter</a>
+                        {% else %}
+                            <p class="text-white link-nav-header">Username : {{ app.user.username|capitalize }}</p>
+                            <a class="link-nav-header text-white" href="{{ path('app_profile',{ username: app.user.username }) }}">Mon profil</a>
+                            <a class="link-nav-header text-white" href="{{ path('app_logout') }}">Deconnexion</a> 
+                        {% endif %}
                 </div>
+            </div>
+     </nav>
 {# 
                 <div class="dropdown">
                 <a class="nav nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,18 +59,16 @@
                 </ul>
                 </div> #}
 
-            </div>
-     </nav>
-    {% endif %}
+    {# {% endif %} #}
 
-    <div class="container">
+    {# <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         
             <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" href="{{path('app_home')}}"
                     <span class="fs-4">Blog Japon</span>
             </a>
 
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills"> #}
 
             {# {% for menu in menus %}
                         {% if menu.subMenus.count > 0 %}
@@ -79,17 +91,17 @@
                         {% endif %}
                     {% endfor %} #}
 
-            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+            {# {% if not is_granted('IS_AUTHENTICATED_FULLY') %} #}
            
-            <li class="nav-item">
+            {# <li class="nav-item">
                 <a class="nav-link text-dark"  href="{{ path('app_register') }}">S'inscrire</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-dark"  href="{{ path('app_login') }}">Se connecter</a>
-            </li>  
+            </li>   #}
           
-            {% else %}
-                <div class="dropdown">
+            {# {% else %} #}
+                {# <div class="dropdown">
                     <a class="nav nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {{ app.user.username|capitalize }}
                     </a>
@@ -101,23 +113,21 @@
                             <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
                         </li>
                     </ul>
-                </div>
-            {% endif %}  
-        </ul>
+                </div> #}
+            {# {% endif %}   #}
+        {# </ul>
           
         </header>
-    </div>
+    </div> #}
 
         {% block body %}{% endblock %}
 
+            
+    <footer>
+           
+                <span class="copyright">© Benjamin Prince {{ 'now'|date('Y') }}</span>
 
-        
-    <div class="container">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <div class="col-md-4 d-flex align-items-center">
-                    <span class="copyright">© {{ 'now'|date('Y') }}</span>
-                </div>
-            </footer>
-    </div>
-    </body>
+    </footer>
+           
+    </body> 
 </html>

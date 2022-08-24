@@ -54,11 +54,12 @@ class CommentController extends AbstractController
         $html = $this->renderView('comment/index.html.twig', [
             'comment' => $comment
         ]);
+      
 
         return $this->json([
             'code' => 'COMMENT_ADDED_SUCCESSFULLY' ,
             'message' => $html,
-            'numberOfComments' => $commentRepo->count(['article'=>'$article'])
+            'numberOfComments' => count($article->getComments()->getValues())
         ]);
     }
 }

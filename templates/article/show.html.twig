@@ -9,7 +9,9 @@
         {{ article.content|raw }}
 
         <h2 class="comment-title mt-5">
-            <span class="comment-count">{{ article.comments|length }} </span>commentaire(s)
+            <span class="comment-count">
+                {{ article.comments|length }} 
+            </span>commentaire(s)
         </h2>
 
         <hr>
