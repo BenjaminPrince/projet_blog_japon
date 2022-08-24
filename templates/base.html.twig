@@ -29,10 +29,10 @@
                     <a class="nav nav-link dropdown-toggle text-white" role="button" id="dropdownAdminLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Blog Japon
                     </a> 
-                    {% if is_granted('ROLE_ADMIN', 'ROLE_AUTHOR') %}
+                   
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminDashboard">
                         <li><a class="dropdown-item" href="{{path('admin')}}">Tableau de bord</a></li>
-                       
+                        {% if is_granted('ROLE_ADMIN', 'ROLE_AUTHOR') %}
                         {# <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li> #}
                         {% endif %}
                     </ul>
