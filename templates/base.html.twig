@@ -23,105 +23,37 @@
 
     <div class="image-nav">
         <a href="#">      	   
-        <img  class="imageNav" src="https://cdn.pixabay.com/photo/2017/05/11/23/21/mount-fuji-2305606_960_720.jpg" width="2435" height="659" alt="JAPON" ></a>			
+        <img  class="imageNav" src="https://cdn.pixabay.com/photo/2017/05/11/23/21/mount-fuji-2305606_960_720.jpg"  alt="JAPON" ></a>			
     </div>
 
 
-     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container d-flex flex-wrap">
+     <nav class="navbar navbar-expand-lg navbar-dark bgNav">
+            <div class="container d-flex flex-wrap justify-content-center align-items-center">
                 <div class="dropdown d-flex">
-                    <a class="navbar-brand nav nav-link dropdown-toggle text-white" role="button" id="dropdownAdminLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    
+                        <a class="navbar-brand nav nav-link dropdown-toggle text-black" role="button" id="dropdownAdminLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Blog Japon
-                    </a> 
+                        </a> 
                     {% if is_granted('ROLE_AUTHOR') %}
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminDashboard">
                     <li><a class="dropdown-item" href="{{path('admin')}}">Tableau de bord</a></li>
                         {# <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li> #}
                         {% endif %}
                     </ul>
-                        <a class="link-nav-header text-white p-8" href="{{path('app_home')}}">Articles Récents </a>
+                        <a class="link-nav-header text-black p-8" href="{{path('app_home')}}">Articles </a>
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <a class="link-nav-header text-white" href="{{ path('app_register') }}">S'inscrire</a>
-                            <a class="link-nav-header text-white" href="{{ path('app_login') }}">Se connecter</a>
+                            <a class="link-nav-header text-black" href="{{ path('app_register') }}">S'inscrire</a>
+                            <a class="link-nav-header text-black" href="{{ path('app_login') }}">Se connecter</a>
                         {% else %}
-                            <p class="text-white link-nav-header">Pseudo: {{ app.user.username|capitalize }}</p>
-                            <a class="link-nav-header text-white" href="{{ path('app_profile',{ username: app.user.username }) }}">Mon profil</a>
-                            <a class="link-nav-header text-white" href="{{ path('app_logout') }}">Deconnexion</a> 
+                            <p class="text-black link-nav-header">Pseudo: {{ app.user.username|capitalize }}</p>
+                            <a class="link-nav-header text-black" href="{{ path('app_profile',{ username: app.user.username }) }}">Mon profil</a>
+                            <a class="link-nav-header text-black" href="{{ path('app_logout') }}">Deconnexion</a> 
                         {% endif %}
                 </div>
             </div>
      </nav>
-{# 
-                <div class="dropdown">
-                <a class="nav nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                     Ajouter
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminAdd">
-                    <li><a class="dropdown-item" href="#">Article</a></li>
-                    <li><a class="dropdown-item" href="#">Page</a></li>
-                </ul>
-                </div> #}
 
-    {# {% endif %} #}
-
-    {# <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        
-            <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" href="{{path('app_home')}}"
-                    <span class="fs-4">Blog Japon</span>
-            </a>
-
-        <ul class="nav nav-pills"> #}
-
-            {# {% for menu in menus %}
-                        {% if menu.subMenus.count > 0 %}
-                            <div class="dropdown">
-                                <a class="nav nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ menu.name }}
-                                </a>
-                               <ul class="dropdown-menu">
-                                    {% for subMenu in menu.subMenus %}
-                                        <li>
-                                        <a class="dropdown-item" href="{{ subMenu|menuLink }}"> {{ subMenu.name }} </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" href="#"> {{ menu.name }}</a>
-                            </li>
-                        {% endif %}
-                    {% endfor %} #}
-
-            {# {% if not is_granted('IS_AUTHENTICATED_FULLY') %} #}
-           
-            {# <li class="nav-item">
-                <a class="nav-link text-dark"  href="{{ path('app_register') }}">S'inscrire</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark"  href="{{ path('app_login') }}">Se connecter</a>
-            </li>   #}
-          
-            {# {% else %} #}
-                {# <div class="dropdown">
-                    <a class="nav nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ app.user.username|capitalize }}
-                    </a>
-                    <ul class="dropdown-item">
-                        <li>
-                            <a class="dropdown-item" href="{{ path('app_profile',{ username: app.user.username }) }}"> Mon profil</a>
-                        </li>
-                         <li>
-                            <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
-                        </li>
-                    </ul>
-                </div> #}
-            {# {% endif %}   #}
-        {# </ul>
-          
-        </header>
-    </div> #}
+                
 
         {% block body %}{% endblock %}
 

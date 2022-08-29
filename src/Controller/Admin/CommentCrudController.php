@@ -21,8 +21,8 @@ class CommentCrudController extends AbstractCrudController
     public function configureActionS(Actions $actions): Actions
     {
         return $actions
-            ->remove(Crud::PAGE_INDEX, Action::NEW);
-            
+            ->remove(Crud::PAGE_INDEX, Action::NEW)
+            ->remove(Crud::PAGE_INDEX, Action::EDIT);
             
     }
 
