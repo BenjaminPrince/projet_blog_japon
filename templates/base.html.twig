@@ -6,7 +6,6 @@
     <head>
         <meta charset="UTF-8">
         <title>Blog - {% block title %}{% endblock %}</title>
-        
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -22,26 +21,30 @@
     </head>
     <body>
 
-    {# {% if is_granted('ROLE_AUTHOR') %} #}
-     <nav class="py-2 bg-dark border-bottom">
+    <div class="image-nav">
+        <a href="#">      	   
+        <img  class="imageNav" src="https://cdn.pixabay.com/photo/2017/05/11/23/21/mount-fuji-2305606_960_720.jpg" width="2435" height="659" alt="JAPON" ></a>			
+    </div>
+
+
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container d-flex flex-wrap">
                 <div class="dropdown d-flex">
-                    <a class="nav nav-link dropdown-toggle text-white" role="button" id="dropdownAdminLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="navbar-brand nav nav-link dropdown-toggle text-white" role="button" id="dropdownAdminLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Blog Japon
                     </a> 
-                   
+                    {% if is_granted('ROLE_AUTHOR') %}
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminDashboard">
-                        <li><a class="dropdown-item" href="{{path('admin')}}">Tableau de bord</a></li>
-                        {% if is_granted('ROLE_ADMIN', 'ROLE_AUTHOR') %}
+                    <li><a class="dropdown-item" href="{{path('admin')}}">Tableau de bord</a></li>
                         {# <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li> #}
                         {% endif %}
                     </ul>
-                        <a class="link-nav-header text-white p-8" href="{{path('app_home')}}">Page d'article </a>
+                        <a class="link-nav-header text-white p-8" href="{{path('app_home')}}">Articles Récents </a>
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                             <a class="link-nav-header text-white" href="{{ path('app_register') }}">S'inscrire</a>
                             <a class="link-nav-header text-white" href="{{ path('app_login') }}">Se connecter</a>
                         {% else %}
-                            <p class="text-white link-nav-header">Username : {{ app.user.username|capitalize }}</p>
+                            <p class="text-white link-nav-header">Pseudo: {{ app.user.username|capitalize }}</p>
                             <a class="link-nav-header text-white" href="{{ path('app_profile',{ username: app.user.username }) }}">Mon profil</a>
                             <a class="link-nav-header text-white" href="{{ path('app_logout') }}">Deconnexion</a> 
                         {% endif %}

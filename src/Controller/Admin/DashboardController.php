@@ -48,14 +48,14 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToRoute('Retourner sur le site', 'fa fa-undo', 'app_home');
 
-        if ($this->isGranted('ROLE_ADMIN')){
-        yield MenuItem::subMenu('Menus', 'fas fa-list')->setSubItems([
-            MenuItem::linkToCrud('Pages', 'fas fa-file', Menu::class),
-            MenuItem::linkToCrud('Articles', 'fas fa-newspaper',  Menu::class),
-            MenuItem::linkToCrud('Liens personnalisés', 'fas fa-link',  Menu::class),
-            MenuItem::linkToCrud('Catégories', 'fab fa-delicious',  Menu::class),
-        ]);
-        }
+        // if ($this->isGranted('ROLE_ADMIN')){
+        // yield MenuItem::subMenu('Menus', 'fas fa-list')->setSubItems([
+        //     MenuItem::linkToCrud('Pages', 'fas fa-file', Menu::class),
+        //     MenuItem::linkToCrud('Articles', 'fas fa-newspaper',  Menu::class),
+        //     MenuItem::linkToCrud('Liens personnalisés', 'fas fa-link',  Menu::class),
+        //     MenuItem::linkToCrud('Catégories', 'fab fa-delicious',  Menu::class),
+        // ]);
+        // }
 
         if ($this->isGranted('ROLE_AUTHOR')){
             yield MenuItem::subMenu('Articles', 'fas fa-newspaper')->setSubItems([
