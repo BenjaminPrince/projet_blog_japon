@@ -6,7 +6,10 @@
     <div class="container">
         <h1 class="pt-5">{{ article.title }}</h1>
         <hr>
+        <img src="/uploads/{{ article.featuredImage.filename }}" loading="lazy" width="80%" height="60%" >
+
         {{ article.content|raw }}
+       
 
         <h2 class="comment-title mt-5">
             <span class="comment-count">

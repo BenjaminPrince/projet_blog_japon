@@ -31,7 +31,7 @@
             <div class="container d-flex flex-wrap justify-content-center align-items-center">
                 <div class="dropdown d-flex">
                     
-                        <a class="navbar-brand nav nav-link dropdown-toggle text-black" role="button" id="dropdownAdminLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="navbar-brand nav nav-link dropdown-toggle text-white" role="button" id="dropdownAdminLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Blog Japon
                         </a> 
                     {% if is_granted('ROLE_AUTHOR') %}
@@ -40,14 +40,14 @@
                         {# <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li> #}
                         {% endif %}
                     </ul>
-                        <a class="link-nav-header text-black p-8" href="{{path('app_home')}}">Articles </a>
+                        <a class="link-nav-header text-white p-8" href="{{path('app_home')}}">Articles </a>
                         {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <a class="link-nav-header text-black" href="{{ path('app_register') }}">S'inscrire</a>
-                            <a class="link-nav-header text-black" href="{{ path('app_login') }}">Se connecter</a>
+                            <a class="link-nav-header text-white" href="{{ path('app_register') }}">S'inscrire</a>
+                            <a class="link-nav-header text-white" href="{{ path('app_login') }}">Se connecter</a>
                         {% else %}
-                            <p class="text-black link-nav-header">Pseudo: {{ app.user.username|capitalize }}</p>
-                            <a class="link-nav-header text-black" href="{{ path('app_profile',{ username: app.user.username }) }}">Mon profil</a>
-                            <a class="link-nav-header text-black" href="{{ path('app_logout') }}">Deconnexion</a> 
+                            <p class="text-white link-nav-header">Pseudo: {{ app.user.username|capitalize }}</p>
+                            <a class="link-nav-header text-white" href="{{ path('app_profile',{ username: app.user.username }) }}">Mon profil</a>
+                            <a class="link-nav-header text-white" href="{{ path('app_logout') }}">Deconnexion</a> 
                         {% endif %}
                 </div>
             </div>
