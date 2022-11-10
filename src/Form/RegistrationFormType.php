@@ -24,7 +24,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('username', TextType::class,[
                 'label' => "Nom d'utilisateur"
-            ] )
+            ])
            
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,

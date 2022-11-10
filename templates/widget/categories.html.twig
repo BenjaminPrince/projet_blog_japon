@@ -1,9 +1,9 @@
 <div class="p-4">
-    <h4 class="fst-italic">Catégories</h4>
+    <h4 class="fs-4 fst-italic">Catégories</h4>
     <ol class="list-unstyled mb-0">
         {% for category in categories %}
         <li>
-            <a class="text-decoration-none  CategorieOption" href="{{path('category_show', { slug :category.slug }) }}">{{ category.name }}</a>
+            <a class="fs-5 text-decoration-none  CategorieOption" href="{{path('category_show', { slug :category.slug }) }}">{{ category.name }}</a>
         </li>
         {% endfor %}
     </ol>

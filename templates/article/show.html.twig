@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="pt-5">{{ article.title }}</h1>
+        <h1 class="pt-5 ">{{ article.title }}</h1>
         <hr>
         <img src="/uploads/{{ article.featuredImage.filename }}" loading="lazy" width="80%" height="60%" >
 
@@ -26,7 +26,7 @@
         {% endif %}
     
 
-     <div class="comment-list">
+     <div class="comment-list ">
         {% for comment in article.comments %}
             {%include 'comment/index.html.twig' with [comment] %}
         {% endfor %}

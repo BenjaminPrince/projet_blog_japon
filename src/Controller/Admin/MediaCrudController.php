@@ -44,6 +44,4 @@ class MediaCrudController extends AbstractCrudController
 
         yield $imageField;
     }
-
-
 }
